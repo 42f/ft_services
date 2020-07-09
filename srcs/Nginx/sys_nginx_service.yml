@@ -1,0 +1,54 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2020-07-09T07:19:54Z"
+  labels:
+    app: nginx
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          .: {}
+          f:app: {}
+      f:spec:
+        f:externalTrafficPolicy: {}
+        f:ports:
+          .: {}
+          k:{"port":80,"protocol":"TCP"}:
+            .: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector:
+          .: {}
+          f:app: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: kubectl
+    operation: Update
+    time: "2020-07-09T07:19:54Z"
+  name: nginx-deployment
+  namespace: default
+  resourceVersion: "6263"
+  selfLink: /api/v1/namespaces/default/services/nginx-deployment
+  uid: 712dc316-2752-42ff-b3b0-00b232b4fcba
+spec:
+  clusterIP: 10.98.176.27
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 32550
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}
