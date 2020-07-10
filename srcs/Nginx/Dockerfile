@@ -2,6 +2,8 @@ FROM alpine
 
 MAINTAINER bvalette <bvalette@student.42.fr>
 
+LABEL project=ft_service
+
 EXPOSE 80
 EXPOSE 8080
 
