@@ -1,0 +1,3 @@
+GET IP OF CONTAINER
+
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -n1 -qf ancestor=ft_service/ftps)
