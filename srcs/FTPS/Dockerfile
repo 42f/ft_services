@@ -6,29 +6,27 @@ MAINTAINER bvalette <bvalette@student.42.fr>
 LABEL project=ft_service
 LABEL service=ftps
 
+#PORTS
 EXPOSE 21
-EXPOSE 990 
 
 # INSTALL ALL PACKAGED
 RUN apk update \
 && apk upgrade\
 && apk add vim supervisor openssl vsftpd
 
-RUN touch /tmp/FILE_FTP_SERVER_OKKKK
-
-#RUN mkdir -p /run/openrc && touch /run/openrc/softlevel && /sbin/openrc
+# CONF FILES
 COPY ./vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY ./start.sh /bin/start.sh
-COPY ./kill.sh /bin/kill.sh
-ADD ./supervisord.conf /etc/supervisord.conf
 
-RUN chmod 700 /bin/start.sh /bin/kill.sh	\
-&& mkdir -p /etc/ssl/private/		\
+# KILL.SH: shuts down supervisor if any process managed by it happen to fail
+COPY ./kill.sh /bin/kill.sh
+COPY ./supervisord.conf /etc/supervisord.conf
+
+RUN mkdir /home/ftp && touch /home/ftp/Hello_from_ftp.txt		\
+&& chmod 700 /bin/start.sh /bin/kill.sh							\
+&& mkdir -p /etc/ssl/private/									\
 && openssl req -x509 -subj "/C=FR/ST=PARIS/L=Paris/O=42_Corp/OU=bvalette/CN=bvalette@student.42.fr"			\
--nodes -days 7300 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem	\
+-nodes -days 7300 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem		\
 && chmod 600 /etc/ssl/private/vsftpd.pem
 
 CMD ["./bin/start.sh"]
-#&& echo 2 > /etc/pure-ftpd/conf/TLS	\
-#&& mkdir -p /etc/pure-ftpd/conf/	\
-# DEFAULT COMMAND :
