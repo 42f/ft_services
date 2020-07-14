@@ -1,4 +1,4 @@
-FROM alpine:latest 
+FROM ft_service_alpine:latest 
 
 MAINTAINER bvalette <bvalette@student.42.fr>
 
@@ -10,17 +10,15 @@ LABEL service=ftps
 EXPOSE 21
 
 # INSTALL ALL PACKAGED
-RUN apk update \
-&& apk upgrade\
-&& apk add vim supervisor openssl vsftpd
+RUN apk update && apk upgrade && apk add vsftpd
 
 # CONF FILES
-COPY ./vsftpd.conf /etc/vsftpd/vsftpd.conf
-COPY ./start.sh /bin/start.sh
+COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY start.sh /bin/start.sh
 
 # KILL.SH: shuts down supervisor if any process managed by it happen to fail
-COPY ./kill.sh /bin/kill.sh
-COPY ./supervisord.conf /etc/supervisord.conf
+COPY kill.sh /bin/kill.sh
+COPY supervisord.conf /etc/supervisord.conf
 
 RUN mkdir /home/ftp && touch /home/ftp/Hello_from_ftp.txt		\
 && chmod 700 /bin/start.sh /bin/kill.sh							\
