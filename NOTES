@@ -14,13 +14,13 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(d
 CHECKLIST PROJECT :
 
 ▸Nginx/
-	https redirection
+✅	https redirection
+✅	SSH connectivity ?
 	telegraph
-	SSH connectivity ?
 
 ▸FTPS/
-	[x] - ftps
-	[ ] - telegraph
+✅	ftps
+	telegraph
 
 ▸Grafana/
 ▸InfluxDB/

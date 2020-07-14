@@ -1,3 +1,5 @@
+########### FTPS IMAGE
+
 FROM ft_service_alpine:latest 
 
 MAINTAINER bvalette <bvalette@student.42.fr>
@@ -16,8 +18,7 @@ RUN apk update && apk upgrade && apk add vsftpd
 COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY start.sh /bin/start.sh
 
-# KILL.SH: shuts down supervisor if any process managed by it happen to fail
-COPY kill.sh /bin/kill.sh
+# ADD SUPERVISOR CONFIG FILE
 COPY supervisord.conf /etc/supervisord.conf
 
 RUN mkdir /home/ftp && touch /home/ftp/Hello_from_ftp.txt		\
@@ -27,4 +28,5 @@ RUN mkdir /home/ftp && touch /home/ftp/Hello_from_ftp.txt		\
 -nodes -days 7300 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem		\
 && chmod 600 /etc/ssl/private/vsftpd.pem
 
+VOLUME /mnt/ftps_data
 CMD ["./bin/start.sh"]

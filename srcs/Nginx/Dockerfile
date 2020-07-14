@@ -1,3 +1,5 @@
+############# NGINX IAGE
+
 FROM ft_service_alpine:latest 
 
 MAINTAINER bvalette <bvalette@student.42.fr>
@@ -28,6 +30,9 @@ RUN sed -i "s/ssl_session_cache shared:SSL:2m/ssl_session_cache shared:SSL:10m/"
 COPY ssl-params.conf ssl-self-signed.conf /etc/nginx/includes/ 
 ADD ./site.conf /etc/nginx/conf.d/default.conf
 
+# ADD SUPERVISOR CONFIG FILE
+COPY supervisord.conf /etc/supervisord.conf
+
 # CREATE A BASIC WEBPAGE
 RUN mkdir /tmp/mynginx mynginx
 RUN echo "<title>42 bvalette</title><h1 style="text-align:center">FT_SERVICE Kikoo<br/>Build on "$(date)"<br/><img src="https://media.giphy.com/media/l3V0uEmPgKpjZH6ve/source.gif" width="800"></h1>" > /tmp/mynginx/index.html
@@ -36,4 +41,4 @@ RUN echo "<title>42 bvalette</title><h1 style="text-align:center">FT_SERVICE Kik
 RUN mkdir /run/nginx
 
 # DEFAULT COMMAND :
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["supervisord"]

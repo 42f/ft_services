@@ -1,4 +1,5 @@
-FROM alpine
+############ MYSQL IMAHE
+
 
 MAINTAINER bvalette <bvalette@student.42.fr>
 
