@@ -18,9 +18,6 @@ RUN apk update && apk upgrade	\
 # ADD GRAFANA CONFIG FILE
 ADD grafana.ini /etc/grafana.ini
 
-# ADD INFLUXDB PLUGIN
-RUN grafana-cli plugins install grafana-influxdb-08-datasource
-
 # ADD SUPERVISOR CONFIG FILE
 COPY supervisord.conf /etc/supervisord.conf
 

@@ -10,9 +10,9 @@ printf "\n"
 echo "Thanks !"
 export USER_PASS=$USER_PASS
 
-docker volume create --name influxdb_influx --label project=ft_service --label service=influxdb
-docker volume create --name influxdb_db --label project=ft_service --label service=influxdb
-docker volume create --name ftps_data --label project=ft_service --label service=ftps
+docker volume create --name influxdb-influx --label project=ft_service --label service=influxdb
+docker volume create --name influxdb-db --label project=ft_service --label service=influxdb
+docker volume create --name ftps-data --label project=ft_service --label service=ftps
 
 docker build -t ft_service_alpine srcs/base_image
 

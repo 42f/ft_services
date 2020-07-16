@@ -10,7 +10,7 @@ metadata:
     metallb.universe.tf/allow-shared-ip: shared-ip
   labels:
     app: nginx
-  name: nginx-deployment
+  name: nginx
   namespace: default
 spec:
   type: LoadBalancer

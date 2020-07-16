@@ -6,11 +6,9 @@ apiVersion: v1
 kind: Service
 metadata:
   creationTimestamp: "2020-07-09T07:19:54Z"
-  annotations:
-    metallb.universe.tf/allow-shared-ip: shared-ip
   labels:
     app: grafana
-  name: grafana-deployment
+  name: grafana
   namespace: default
 spec:
   type: LoadBalancer
