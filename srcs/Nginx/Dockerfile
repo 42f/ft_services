@@ -21,8 +21,8 @@ RUN openssl req -x509 \
 -newkey rsa:2048 	\
 -keyout /etc/ssl/private/nginx-selfsigned.key		\
 -out /etc/ssl/certs/nginx-selfsigned.crt 			\
-&& chmod 600 /etc/ssl/private/nginx-selfsigned.key 	\
-&& openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+&& chmod 600 /etc/ssl/private/nginx-selfsigned.key 	\	
+&& openssl dhparam -out /etc/ssl/certs/dhparam.pem 128 
 
 # ADD CONFIG FILE FOR NGNINX
 RUN mkdir -p /etc/nginx/includes

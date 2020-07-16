@@ -17,16 +17,17 @@ docker volume create --name ftps_data --label project=ft_service --label service
 docker build -t ft_service_alpine srcs/base_image
 
 
-#docker build -t ft_service/nginx srcs/Nginx
+docker build -t ft_service/nginx srcs/Nginx
 docker build -t ft_service/ftps srcs/FTPS/
 docker build -t ft_service/influxdb srcs/InfluxDB
-#docker build -t ft_service/Grafana srcs/Grafana
-#docker build -t ft_service/LoadBalancer srcs/LoadBalancer
-#docker build -t ft_service/MySQL srcs/MySQL
-#docker build -t ft_service/PhpMyAdmin srcs/PhpMyAdmin
-#docker build -t ft_service/WordPress srcs/WordPress
+docker build -t ft_service/grafana srcs/Grafana
+#docker build -t ft_service/loadbalancer srcs/LoadBalancer
+#docker build -t ft_service/mysql srcs/MySQL
+#docker build -t ft_service/phpmyadmin srcs/PhpMyAdmin
+#docker build -t ft_service/wordpress srcs/WordPress
 
 #docker run -it ft_service/nginx
-docker run -d --rm -it --name ftps -v ftps_data:/mnt/ftps_data -e USER_PASS_VAL=$USER_PASS ft_service/ftps
-docker run -d --rm -it --name influxdb -v influxdb_db:/mnt/db -v influxdb_influx:/mnt/influx ft_service/influxdb
+#docker run -d --rm -it --name ftps -v ftps_data:/mnt/ftps_data -e USER_PASS_VAL=$USER_PASS ft_service/ftps
+#docker run -d --rm -it --name influxdb -v influxdb_db:/mnt/db -v influxdb_influx:/mnt/influx ft_service/influxdb
+#docker run  --rm -it --name grafana ft_service/grafana sh
 

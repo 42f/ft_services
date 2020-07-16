@@ -5,15 +5,19 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(d
 
 
 
+=============
 
-
-
+⚠️
+⚠️		change in Nginx : 128 -> 2048 !!
+		volumes in deployments files
+⚠️
 
 ==============
 
 CHECKLIST PROJECT :
 
 ▸Nginx/
+⚠️	change 128 -> 2048 !!
 ✅	https redirection
 ✅	SSH connectivity ?
 	telegraph
