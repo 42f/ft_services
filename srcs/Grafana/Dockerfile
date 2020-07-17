@@ -17,7 +17,8 @@ RUN apk update && apk upgrade	\
 
 # ADD GRAFANA CONFIG FILE
 ADD grafana.ini /etc/grafana.ini
-
+ADD datasources.yml /usr/share/grafana/conf/provisioning/datasources/default.yml
+#ADD dashboard.yml /usr/share/grafana/conf/provisioning/dashboards/default.yml
 # ADD SUPERVISOR CONFIG FILE
 COPY supervisord.conf /etc/supervisord.conf
 

@@ -20,4 +20,3 @@ spec:
     targetPort: 8086
   selector:
     app: influxdb
-  sessionAffinity: None

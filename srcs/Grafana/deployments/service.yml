@@ -20,4 +20,3 @@ spec:
     targetPort: 3000
   selector:
     app: grafana
-  sessionAffinity: None
