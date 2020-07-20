@@ -28,13 +28,13 @@ RUN openssl req -x509 \
 RUN mkdir -p /etc/nginx/includes
 RUN sed -i "s/ssl_session_cache shared:SSL:2m/ssl_session_cache shared:SSL:10m/" /etc/nginx/nginx.conf 
 COPY ssl-params.conf ssl-self-signed.conf /etc/nginx/includes/ 
-ADD ./site.conf /etc/nginx/conf.d/default.conf
+COPY site.conf /etc/nginx/conf.d/default.conf
 
 # ADD SUPERVISOR CONFIG FILE
 COPY supervisord.conf /etc/supervisord.conf
 
 # CREATE A BASIC WEBPAGE
-RUN mkdir /tmp/mynginx mynginx
+RUN mkdir /tmp/mynginx
 RUN echo "<title>42 bvalette</title><h1 style="text-align:center">FT_SERVICE Kikoo<br/>Build on "$(date)"<br/><img src="https://media.giphy.com/media/l3V0uEmPgKpjZH6ve/source.gif" width="800"></h1>" > /tmp/mynginx/index.html
 
 # CREATE DIRECTORY TO BE ABLE TO EXECUTE NGINX

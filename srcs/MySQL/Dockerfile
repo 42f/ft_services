@@ -1,23 +1,21 @@
-############ MYSQL IMAHE
+########### MYSQL IMAGE
 
+FROM ft_service_alpine:latest 
 
 MAINTAINER bvalette <bvalette@student.42.fr>
 
-EXPOSE 80
-EXPOSE 8080
+LABEL project=ft_service
+LABEL service=mysql
+
+EXPOSE 3306 
 
 # INSTALL ALL PACKAGED
-RUN apk update && apk add openrc --no-cache && apk add nginx
+RUN apk update && apk upgrade && apk add --no-cache mysql
 
-# ADD CONFIG FILE FOR NGNINX
-ADD ./site.conf /etc/nginx/conf.d/default.conf
+# ADD SUPERVISOR CONFIG FILE
+COPY supervisord.conf /etc/supervisord.conf
 
-# CREATE A BASIC WEBPAGE
-RUN mkdir /tmp/mynginx mynginx
-RUN echo "<title>42 bvalette</title><h1 style="text-align:center">FT_SERVICE Kikoo<br/>Build on "$(date)"<br/><img src="https://media.giphy.com/media/l3V0uEmPgKpjZH6ve/source.gif" width="800"></h1>" > /tmp/mynginx/index.html
-
-# CREATE DIRECTORY TO BE ABLE TO EXECUTE NGINX
-RUN mkdir /run/nginx
+VOLUME /var/lib/mysql
 
 # DEFAULT COMMAND :
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["supervisord"]

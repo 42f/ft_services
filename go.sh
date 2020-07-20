@@ -7,21 +7,36 @@ RESET='\033[0m'
 echo -e "${RED}Deploying pods and services...${RESET}"
 
 up (){
-	kubectl get pods --ignore-not-found --field-selector status.phase=Running | grep $1 | grep Running
+	kubectl get pods --ignore-not-found --field-selector status.phase=Running | grep -i $1 | grep Running
 }
 
 launch () {
-kubectl apply -f srcs/$1/deployments/deployment.yml  -f srcs/$1/deployments/service.yml
-until up $2
-do	
-	echo -e "${DARK}Waitin for $1${RESET}"
-	sleep 0.4
-done
+	kubectl apply -f srcs/$1/deployments/deployment.yml  -f srcs/$1/deployments/service.yml
+	printf "${DARK}Waitin for $1${RESET}\n"
+	until up $1
+	do	
+		printf "${DARK}.${RESET}"
+		sleep 0.4
+	done
 }
 
-launch "InfluxDB" "influxdb-0" 
-launch "Nginx" "nginx-0" 
-launch "FTPS" "ftps-0" 
-launch "Grafana" "grafana-0" 
-echo -e "${GREEN}ALL SET, here is the dashboard address :${RESET}"
-minikube service grafana --url
+show_address () {
+	printf "\n\n${GREEN}--> ${RED}$1${RESET}${GREEN} address:${RESET}\n"
+	minikube service $2 --url
+}
+
+services=( `cat srcs/activ_services`)
+
+for t in "${services[@]}"
+do
+launch $t
+done
+
+
+printf "\n\n${GREEN}ALL SET${RESET}\n"
+
+show_address Dashboard grafana
+show_address "Nginx port 80" nginx-80
+show_address "Nginx port 443" nginx-443
+show_address WordPress wordpress
+
