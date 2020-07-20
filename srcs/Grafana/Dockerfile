@@ -16,10 +16,13 @@ RUN apk update && apk upgrade	\
 && apk add grafana --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 # ADD GRAFANA CONFIG FILE
-ADD grafana.ini /etc/grafana.ini
-ADD datasources.yml /usr/share/grafana/conf/provisioning/datasources/default.yml
-#ADD dashboard.yml /usr/share/grafana/conf/provisioning/dashboards/default.yml
+COPY grafana.ini /etc/grafana.ini
+COPY datasources.yml /usr/share/grafana/conf/provisioning/datasources/default.yml
+
 # ADD SUPERVISOR CONFIG FILE
 COPY supervisord.conf /etc/supervisord.conf
+
+# ADD GRAFANA DASHBOARDS DB
+COPY grafana.db /var/lib/grafana/
 
 CMD ["supervisord"]

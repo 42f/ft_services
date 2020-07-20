@@ -27,6 +27,8 @@ CHECKLIST PROJECT :
 	telegraph
 
 ▸Grafana/
+⛔️	password from script
+
 ▸InfluxDB/
 ▸LoadBalancer/
 ▸MySQL/

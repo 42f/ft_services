@@ -18,6 +18,9 @@ ADD supervisord.conf /etc/supervisord.conf
 # ADD CONFIG FILE FOR NGNINX
 ADD ./influxdb.conf /etc/influxdb.conf
 
+# ADJUST TELEGRAF CONF FILE FOR THIS CONTAINER ONLY
+RUN sed -i s/influxdb:8086/localhost:8086/ /etc/telegraf.conf
+
 VOLUME /mnt/db
 VOLUME /mnt/influx
 # DEFAULT COMMAND :
