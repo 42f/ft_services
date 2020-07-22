@@ -17,5 +17,3 @@ spec:
       - name: nginx
         image: ft_service/nginx
         imagePullPolicy: Never
-        ports:
-        - containerPort: 80

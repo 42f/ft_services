@@ -22,16 +22,23 @@ launch () {
 
 show_address () {
 	printf "\n\n${GREEN}--> ${RED}$1${RESET}${GREEN} address:${RESET}\n"
-	minikube service $2 --url
+	if [[ "$2" == *"443"*  ]]; then
+		printf "☝️ use curl --insecure to check\n"
+		minikube service $2 --url --https=true
+	elif [[ "$2" == *"ssh"*  ]]; then
+		printf "☝️ ssh ssh42@[IP] -p [PORT]\n"
+		minikube service $2 --url --https=true
+	else
+		minikube service $2 --url --https=false
+	fi
 }
 
-services=( `cat srcs/activ_services`)
+services=(`cat srcs/activ_services`)
 
 for t in "${services[@]}"
 do
 launch $t
 done
-
 
 printf "\n\n${GREEN}ALL SET${RESET}\n"
 
@@ -39,5 +46,6 @@ show_address Dashboard grafana
 show_address "Nginx port 80" nginx-80
 show_address "Nginx port 443" nginx-443
 show_address "Nginx port ssh" nginx-ssh
-show_address WordPress wordpress
+show_address "WordPress" wordpress
+show_address "MySQL" mysql
 

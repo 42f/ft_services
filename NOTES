@@ -27,7 +27,8 @@ CHECKLIST PROJECT :
 ✅	telegraph
 
 ▸Grafana/
-⛔️	password from script
+⚠️	password from script
+⚠️	add all pods dashboard (missing half of them now)
 
 ▸InfluxDB/
 

@@ -41,4 +41,24 @@ spec:
     targetPort: 443  
   selector:
     app: nginx
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared-ip
+  labels:
+    app: nginx
+  name: nginx-ssh
+  namespace: default
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  ports:
+  - port: 22
+    protocol: TCP
+    targetPort: 22
+  selector:
+    app: nginx
 

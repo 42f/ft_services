@@ -9,9 +9,10 @@ LABEL service=nginx
 
 EXPOSE 80
 EXPOSE 443
+EXPOSE 22
 
 # INSTALL ALL PACKAGED
-RUN apk update && apk upgrade && apk add nginx
+RUN apk update && apk upgrade && apk add nginx openssh
 
 #SSL CERTIFICATE
 RUN openssl req -x509 \
@@ -40,5 +41,9 @@ RUN echo "<title>42 bvalette</title><h1 style="text-align:center">FT_SERVICE Kik
 # CREATE DIRECTORY TO BE ABLE TO EXECUTE NGINX
 RUN mkdir /run/nginx
 
+RUN ssh-keygen -A
+COPY sshd_config /etc/ssh/
+RUN echo -e "123\n123" | adduser -h /home/ssh ssh42
+COPY ssh_banner /etc/issue
 # DEFAULT COMMAND :
 CMD ["supervisord"]

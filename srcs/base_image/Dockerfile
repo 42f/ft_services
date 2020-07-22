@@ -18,4 +18,3 @@ RUN cp /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
 # INSTALL DEBUG PACKAGE
 RUN apk update && apk upgrade && apk add vim curl tar tree
-
