@@ -1,7 +1,11 @@
 #!/bin/bash
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+DARK='\033[1;93m'
+RESET='\033[0m'
 
 #eval $(minikube -p minikube docker-env)
-echo "Hello ! Let's set a few infos first :"
+echo -e "${GREEN}Please set a password for services users:${RESET}"
 stty -echo
 printf "Password: "
 read USER_PASS
@@ -17,13 +21,13 @@ docker volume create --name ftps-data --label project=ft_service --label service
 
 docker build -t ft_service_alpine srcs/base_image
 
-
 docker build -t ft_service/nginx srcs/Nginx
 docker build -t ft_service/ftps srcs/FTPS/
 docker build -t ft_service/influxdb srcs/InfluxDB
 docker build -t ft_service/grafana srcs/Grafana
 docker build -t ft_service/wordpress srcs/WordPress
 docker build -t ft_service/mysql srcs/MySQL
+
 #docker build -t ft_service/phpmyadmin srcs/PhpMyAdmin
 
 #docker run -it ft_service/nginx

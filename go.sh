@@ -25,6 +25,10 @@ show_address () {
 	if [[ "$2" == *"443"*  ]]; then
 		printf "☝️ use curl --insecure to check\n"
 		minikube service $2 --url --https=true
+	elif [[ "$2" == *"ftps"*  ]]; then
+		printf "☝️ [set ssl:verify-certificate false] in ~/.lftprc given the ftps container uses a selfsigned certificate\n"
+		printf "☝️ lftp -u ftp42 [ADDRESS]\n"
+		minikube service $2 --url
 	elif [[ "$2" == *"ssh"*  ]]; then
 		printf "☝️ ssh ssh42@[IP] -p [PORT]\n"
 		minikube service $2 --url --https=true
@@ -43,6 +47,7 @@ done
 printf "\n\n${GREEN}ALL SET${RESET}\n"
 
 show_address Dashboard grafana
+show_address "FTPS" ftps
 show_address "Nginx port 80" nginx-80
 show_address "Nginx port 443" nginx-443
 show_address "Nginx port ssh" nginx-ssh

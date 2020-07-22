@@ -41,9 +41,12 @@ RUN echo "<title>42 bvalette</title><h1 style="text-align:center">FT_SERVICE Kik
 # CREATE DIRECTORY TO BE ABLE TO EXECUTE NGINX
 RUN mkdir /run/nginx
 
-RUN ssh-keygen -A
+
 COPY sshd_config /etc/ssh/
-RUN echo -e "123\n123" | adduser -h /home/ssh ssh42
+COPY start.sh /bin/start.sh
 COPY ssh_banner /etc/issue
+
+RUN ssh-keygen -A && chmod 700 /bin/start.sh
+
 # DEFAULT COMMAND :
-CMD ["supervisord"]
+CMD ["./bin/start.sh"]
