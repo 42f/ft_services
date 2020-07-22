@@ -20,18 +20,26 @@ CHECKLIST PROJECT :
 ⚠️	change 128 -> 2048 !!
 ✅	https redirection
 ✅	SSH connectivity ?
-	telegraph
+✅	telegraph
 
 ▸FTPS/
 ✅	ftps
-	telegraph
+✅	telegraph
 
 ▸Grafana/
 ⛔️	password from script
 
 ▸InfluxDB/
+
+
 ▸LoadBalancer/
+
+
 ▸MySQL/
+
+
 ▸PhpMyAdmin/
+
+
 ▸WordPress/
 

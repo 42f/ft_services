@@ -42,4 +42,3 @@ spec:
   selector:
     app: nginx
 
-

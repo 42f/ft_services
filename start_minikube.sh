@@ -9,10 +9,7 @@ fi
 
 eval $(minikube -p minikube docker-env)
 
-./srcs/LoadBalancer/deploy_metallb.sh
-
-
-kubectl apply -f srcs/Nginx/sys_nginx_deployment.yml -f srcs/Nginx/sys_nginx_service.yml
+#./srcs/LoadBalancer/deploy_metallb.sh
 
 #to be activated at the end
 #minikube dashboard --url

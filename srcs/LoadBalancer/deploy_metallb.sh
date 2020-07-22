@@ -7,4 +7,4 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manife
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 
 # CONFIGURATION
-kubectl apply -f srcs/metallb_config.yaml
+kubectl apply -f srcs/LoadBalancer/metallb_config.yaml

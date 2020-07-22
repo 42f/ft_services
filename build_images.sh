@@ -23,7 +23,7 @@ docker build -t ft_service/ftps srcs/FTPS/
 docker build -t ft_service/influxdb srcs/InfluxDB
 docker build -t ft_service/grafana srcs/Grafana
 docker build -t ft_service/wordpress srcs/WordPress
-docker build -t ft_service/mysql srcs/MySQL
+#docker build -t ft_service/mysql srcs/MySQL
 #docker build -t ft_service/phpmyadmin srcs/PhpMyAdmin
 
 #docker run -it ft_service/nginx

@@ -38,5 +38,6 @@ printf "\n\n${GREEN}ALL SET${RESET}\n"
 show_address Dashboard grafana
 show_address "Nginx port 80" nginx-80
 show_address "Nginx port 443" nginx-443
+show_address "Nginx port ssh" nginx-ssh
 show_address WordPress wordpress
 
