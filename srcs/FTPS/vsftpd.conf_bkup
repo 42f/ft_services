@@ -25,5 +25,5 @@ vsftpd_log_file=/ftp/vsftpd.log
 background=NO
 rsa_cert_file=/etc/ssl/certs/vsftpd.crt
 rsa_private_key_file=/etc/ssl/private/vsftpd.key
-
 seccomp_sandbox=NO
+
