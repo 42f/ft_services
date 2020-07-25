@@ -5,19 +5,32 @@ DARK='\033[1;93m'
 RESET='\033[0m'
 
 #eval $(minikube -p minikube docker-env)
-echo -e "${GREEN}Please set a password for services users:${RESET}"
-stty -echo
-printf "Password: "
-read USER_PASS
-stty echo
-printf "\n"
-echo "Thanks !"
-export USER_PASS=$USER_PASS
+#echo -e "${GREEN}Please set a password for services users:${RESET}"
+#stty -echo
+#printf "Password: "
+#read USER_PASS
+##stty echo
+#printf "\n"
+#echo "Thanks !"
+#export USER_PASS=$USER_PASS
 
-docker volume create --name mysql-db --label project=ft_service --label service=mysql
-docker volume create --name influxdb-influx --label project=ft_service --label service=influxdb
-docker volume create --name influxdb-db --label project=ft_service --label service=influxdb
-docker volume create --name ftps-data --label project=ft_service --label service=ftps
+
+
+create_volume () {
+	docker volume ls --quiet --filter name=$1 | grep $1
+	if [ $? -ne 0 ]
+		then
+			printf "‼️⚡️ ${RED} Volume $1 missing, creating it...\n${RESET}"
+			docker volume create --name $1 --label project=ft_service --label service=$2
+		else
+			printf "👌 ${GREEN} Volume $1 fund, skiping creation...\n${RESET}"
+	fi
+}
+
+create_volume mysql-db mysql
+create_volume influxdb-influx influxdb
+create_volume influxdb-db influxdb
+create_volume ftps-data ftps
 
 docker build -t ft_service_alpine srcs/base_image
 

@@ -13,8 +13,14 @@ spec:
   type: LoadBalancer
   externalTrafficPolicy: Cluster
   ports:
-  - port: 21
-    protocol: TCP
+  - name: port-20
+    port: 20 
+    targetPort: 20
+  - name: port-21
+    port: 21
     targetPort: 21
+  - name: port-data
+    port: 30000
+    targetPort: 30000
   selector:
     app: ftps
