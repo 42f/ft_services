@@ -11,8 +11,6 @@ spec:
   selector:
     app: ftps
   ports:
-  - name: ftp-data
-    port: 20
   - name: ftp-connection
     port: 21
   - name: pftp-data-0
@@ -41,20 +39,6 @@ spec:
         image: ft_service/ftps
         imagePullPolicy: Never
         ports:
-        - containerPort: 20
         - containerPort: 21
         - containerPort: 30000
-        env:
-        - name: USER
-          value: peer
-        - name: PASS
-          value: pass
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: HOSTNAME 
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
 
