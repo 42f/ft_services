@@ -5,7 +5,9 @@ DARK='\033[1;93m'
 RESET='\033[0m'
 
 eval $(minikube -p minikube docker-env)
-echo -e "${GREEN}Please set a password for services users:${RESET}"
+echo -e "${GREEN}Please set credentials for user accounts inside containers:${RESET}"
+printf "User name: "
+read USER_NAME
 stty -echo
 printf "Password: "
 read USER_PASS
@@ -13,8 +15,8 @@ read USER_PASS
 printf "\n"
 echo "Thanks !"
 
-kubectl delete secret mdpftp
-kubectl create secret generic mdpftp --from-literal=pass=$USER_PASS
+kubectl delete secret user-credential
+kubectl create secret generic user-credential --from-literal=pass=$USER_PASS --from-literal=name=$USER_NAME
 
 docker build -t ft_service_alpine srcs/base_image
 

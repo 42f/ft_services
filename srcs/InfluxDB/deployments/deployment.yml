@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/data"
+    path: "/mnt/influx/"
 
 ---
 
@@ -55,14 +55,13 @@ spec:
         ports:
         - containerPort: 8086
         volumeMounts:
-        - mountPath: "/mnt/nginx"
-          name: nginx-pv-storage
+        - mountPath: "/mnt/influx"
+          name: influx-pv-storage
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: "2020-07-09T07:19:54Z"
   labels:
     app: influxdb
   name: influxdb

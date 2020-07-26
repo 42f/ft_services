@@ -17,7 +17,18 @@ spec:
       - name: grafana
         image: ft_service/grafana
         imagePullPolicy: Never
-        ports:
+        env:
+        - name: SECRET_PASS
+          valueFrom:
+            secretKeyRef:
+              name: user-credential 
+              key: pass
+        - name: SECRET_USER
+          valueFrom:
+            secretKeyRef:
+              name: user-credential 
+              key: name 
+       ports:
         - containerPort: 3000 
 
 ---

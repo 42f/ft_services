@@ -16,6 +16,13 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(d
 
 CHECKLIST PROJECT :
 
+
+> SCRIPTS
+
+‼️	move username and password input in go.sh instead of build
+
+
+
 ▸Nginx/
 ⚠️	change 128 -> 2048 !!
 ✅	https redirection

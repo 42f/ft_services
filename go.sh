@@ -28,7 +28,7 @@ show_address () {
 	elif [[ "$2" == *"ftps"*  ]]; then
 		printf "☝️ [set ssl:verify-certificate false] in ~/.lftprc given the ftps container uses a selfsigned certificate\n"
 		printf "☝️ lftp -u ftp42 [ADDRESS]\n"
-		minikube service $2 --url
+		minikube service $2 --url | head -1
 	elif [[ "$2" == *"ssh"*  ]]; then
 		printf "☝️ ssh ssh42@[IP] -p [PORT]\n"
 		minikube service $2 --url --https=true
