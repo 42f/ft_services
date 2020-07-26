@@ -17,3 +17,69 @@ spec:
       - name: nginx
         image: ft_service/nginx
         imagePullPolicy: Never
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared-ip
+  labels:
+    app: nginx
+  name: nginx-80
+  namespace: default
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.240
+  externalTrafficPolicy: Cluster
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared-ip
+  labels:
+    app: nginx
+  name: nginx-443
+  namespace: default
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.240
+  externalTrafficPolicy: Cluster
+  ports:
+  - port: 443
+    protocol: TCP
+    targetPort: 443  
+  selector:
+    app: nginx
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared-ip
+  labels:
+    app: nginx
+  name: nginx-ssh
+  namespace: default
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.240
+  externalTrafficPolicy: Cluster
+  ports:
+  - port: 22
+    protocol: TCP
+    targetPort: 22
+  selector:
+    app: nginx
+
