@@ -9,7 +9,7 @@ LABEL project=ft_service
 LABEL service=ftps
 
 #PORTS
-EXPOSE 20 21 30000
+EXPOSE 21 30000
 
 # INSTALL ALL PACKAGED
 RUN apk update && apk upgrade && apk add vsftpd
