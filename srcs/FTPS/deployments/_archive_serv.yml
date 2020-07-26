@@ -1,0 +1,26 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ftps
+  name: ftps
+  namespace: default
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: port-20
+    port: 20 
+    targetPort: 20
+  - name: port-21
+    port: 21
+    targetPort: 21
+  - name: port-data
+    port: 30000
+    targetPort: 30000
+  selector:
+    app: ftps

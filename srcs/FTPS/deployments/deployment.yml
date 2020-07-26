@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ftps-svc
+  name: ftps
   annotations:
     metallb.universe.tf/address-pool: ftps-ip
   labels:
@@ -13,27 +13,62 @@ spec:
   ports:
   - name: ftp-connection
     port: 21
-  - name: pftp-data-0
+  - name: pftp-data
     port: 30000
 
 ---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ftps-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ftps-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: ftps
   labels:
     app: ftps
 spec:
+  serviceName: "ftps"
   selector:
     matchLabels:
       app: ftps
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
         app: ftps
     spec:
+      volumes:
+      - name: ftps-pv-storage
+        persistentVolumeClaim:
+          claimName: ftps-pv-claim
       containers:
       - name: ftps
         image: ft_service/ftps
@@ -41,4 +76,6 @@ spec:
         ports:
         - containerPort: 21
         - containerPort: 30000
-
+        volumeMounts:
+        - mountPath: "/mnt/ftp"
+          name: ftps-pv-storage

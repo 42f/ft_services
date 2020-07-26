@@ -27,8 +27,6 @@ RUN chmod 700 /bin/start.sh										\
 # ADD SUPERVISOR CONFIG FILE
 COPY supervisord.conf /etc/supervisord.conf
 
-RUN mkdir -p /var/run/vsftpd/empty && mkdir /ftp
-
 VOLUME /mnt/ftps-data
 
 CMD ["./bin/start.sh"]
