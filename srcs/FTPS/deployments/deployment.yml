@@ -73,6 +73,12 @@ spec:
       - name: ftps
         image: ft_service/ftps
         imagePullPolicy: Never
+        env:
+        - name: SECRET_FTP
+          valueFrom:
+            secretKeyRef:
+              name: mdpftp
+              key: pass
         ports:
         - containerPort: 21
         - containerPort: 30000
