@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: mysql
-  replicas: 1 # tells deployment to run 2 pods matching the template
+  replicas: 1
   template:
     metadata:
       labels:
@@ -18,30 +18,20 @@ spec:
         image: ft_service/mysql
         imagePullPolicy: Never
         ports:
-        - containerPort: 5050
-        volumeMounts:
-        - name: mysql-db
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-db
+        - containerPort: 3306
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
+  name: mysql
   labels:
     app: mysql
-  name: mysql
-  namespace: default
 spec:
-  type: LoadBalancer
-  externalTrafficPolicy: Cluster
+  type: ClusterIP
   ports:
   - port: 3306 
-    protocol: TCP
-    targetPort: 3306
   selector:
     app: mysql
 

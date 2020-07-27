@@ -2,7 +2,8 @@ GET IP OF CONTAINER
 
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -n1 -qf ancestor=ft_service/ftps)
 
-
+automate ftps connection by getting external ip
+lftp -u 42,42 $(kubectl get services ftps --output jsonpath='{.status.loadBalancer.ingress[0].ip}') -p 21
 
 
 =============

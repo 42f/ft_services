@@ -4,6 +4,19 @@ GREEN='\033[1;32m'
 DARK='\033[1;93m'
 RESET='\033[0m'
 
+echo -e "${GREEN}Please set credentials for user accounts inside containers:${RESET}"
+printf "User name: "
+read USER_NAME
+stty -echo
+printf "Password: "
+read USER_PASS
+#stty echo
+printf "\n"
+echo "Thanks !"
+
+kubectl delete secret user-credential
+kubectl create secret generic user-credential --from-literal=pass=$USER_PASS --from-literal=name=$USER_NAME
+
 echo -e "${RED}Deploying pods and services...${RESET}"
 
 up (){
@@ -48,9 +61,7 @@ printf "\n\n${GREEN}ALL SET${RESET}\n"
 
 show_address Dashboard grafana
 show_address "FTPS" ftps
-show_address "Nginx port 80" nginx-80
-show_address "Nginx port 443" nginx-443
-show_address "Nginx port ssh" nginx-ssh
+show_address "Nginx" nginx
 show_address "WordPress" wordpress
 show_address "MySQL" mysql
 

@@ -15,6 +15,9 @@ php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl
 # ADD CONFIG FILE FOR NGNINX
 COPY site.conf /etc/nginx/conf.d/default.conf
 
+# ADD WORDPRESS CONFIG
+COPY wp-config.php /var/www/wordpress/
+
 # ADD SUPERVISOR CONFIG FILE
 COPY supervisord.conf /etc/supervisord.conf
 
