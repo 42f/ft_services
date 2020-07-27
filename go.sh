@@ -11,7 +11,7 @@ up (){
 }
 
 launch () {
-	kubectl apply -f srcs/$1/deployments/deployment.yml  -f srcs/$1/deployments/service.yml
+	kubectl apply -f srcs/$1/deployments/deployment.yml 
 	printf "${DARK}Waitin for $1${RESET}\n"
 	until up $1
 	do	

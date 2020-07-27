@@ -18,17 +18,17 @@ spec:
         image: ft_service/grafana
         imagePullPolicy: Never
         env:
+        - name: SECRET_NAME
+          valueFrom:
+            secretKeyRef:
+              name: user-credential 
+              key: name 
         - name: SECRET_PASS
           valueFrom:
             secretKeyRef:
               name: user-credential 
               key: pass
-        - name: SECRET_USER
-          valueFrom:
-            secretKeyRef:
-              name: user-credential 
-              key: name 
-       ports:
+        ports:
         - containerPort: 3000 
 
 ---
@@ -36,7 +36,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: "2020-07-09T07:19:54Z"
   labels:
     app: grafana
   name: grafana
