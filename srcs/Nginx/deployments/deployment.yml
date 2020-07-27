@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  replicas: 2 # tells deployment to run 2 pods matching the template
+  replicas: 2
   template:
     metadata:
       labels:
@@ -17,6 +17,10 @@ spec:
       - name: nginx
         image: ft_service/nginx
         imagePullPolicy: Never
+        ports:
+        - containerPort: 22
+        - containerPort: 80
+        - containerPort: 443
         env:
         - name: SECRET_NAME
           valueFrom:
@@ -40,6 +44,7 @@ metadata:
   labels:
     app: nginx
 spec:
+  loadBalancerIP: 192.168.99.150
   type: LoadBalancer
   selector:
     app: nginx
