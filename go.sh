@@ -11,13 +11,16 @@ stty -echo
 printf "Password: "
 read USER_PASS
 #stty echo
-printf "\n"
-echo "Thanks !"
+echo -e "\nThanks !\n"
 
-kubectl delete secret user-credential
+kubectl describe secrets | grep user-credential
+if [ $? -eq 0 ]; then
+	kubectl delete secret user-credential
+fi
+
 kubectl create secret generic user-credential --from-literal=pass=$USER_PASS --from-literal=name=$USER_NAME
 
-echo -e "${RED}Deploying pods and services...${RESET}"
+echo -e "\n\n${GREEN}Deploying pods and services...${RESET}\n\n"
 
 up (){
 	kubectl get pods --ignore-not-found --field-selector status.phase=Running | grep -i $1 | grep Running
@@ -35,16 +38,16 @@ launch () {
 
 show_address () {
 	printf "\n\n${GREEN}--> ${RED}$1${RESET}${GREEN} address:${RESET}\n"
-	if [[ "$2" == *"443"*  ]]; then
+	if [[ "$2" == *"https"*  ]]; then
 		printf "☝️ use curl --insecure to check\n"
 		minikube service $2 --url --https=true
 	elif [[ "$2" == *"ftps"*  ]]; then
 		printf "☝️ [set ssl:verify-certificate false] in ~/.lftprc given the ftps container uses a selfsigned certificate\n"
-		printf "☝️ lftp -u ftp42 [ADDRESS]\n"
+		printf "☝️ lftp -u $USER_NAME,[PASSWORD] [ADDRESS]\n"
 		minikube service $2 --url | head -1
 	elif [[ "$2" == *"ssh"*  ]]; then
-		printf "☝️ ssh ssh42@[IP] -p [PORT]\n"
-		minikube service $2 --url --https=true
+		printf "☝️ ssh $USER_NAME@[IP] -p [PORT]\n"
+		minikube service $2 --url --https=false
 	else
 		minikube service $2 --url --https=false
 	fi
@@ -62,6 +65,7 @@ printf "\n\n${GREEN}ALL SET${RESET}\n"
 show_address Dashboard grafana
 show_address "FTPS" ftps
 show_address "Nginx" nginx
+show_address "Nginx-https" nginx-https
+show_address "Nginx-ssh" nginx-ssh
 show_address "WordPress" wordpress
-show_address "MySQL" mysql
 
