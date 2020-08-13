@@ -11,7 +11,8 @@ EXPOSE 5050
 
 # INSTALL ALL PACKAGED
 RUN apk update && apk upgrade && apk add nginx \
-php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl mysql-client
+php7 php7-json php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl 
+
 # ADD CONFIG FILE FOR NGNINX
 COPY site.conf /etc/nginx/conf.d/default.conf
 

@@ -29,6 +29,7 @@ builder ft_service/influxdb srcs/InfluxDB
 builder ft_service/grafana srcs/Grafana
 builder ft_service/wordpress srcs/WordPress
 builder ft_service/mysql srcs/MySQL
+builder ft_service/phpmyadmin srcs/PhpMyAdmin
 
 
 #docker build --quiet -t ft_service/nginx srcs/Nginx

@@ -10,14 +10,14 @@ LABEL service=phpmyadmin
 EXPOSE 5000
 
 # INSTALL ALL PACKAGED
-RUN apk update && apk upgrade && apk add phpyadmin
+RUN apk update && apk upgrade && apk add nginx phpmyadmin \
+php7 php7-json php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl
 
 # ADD SUPERVISOR CONFIG FILE
 COPY supervisord.conf /etc/supervisord.conf
-
-# DOWNLOAD WORDPRESS
-ADD wordpress_latest.tar.gz /var/www/
-
+#COPY config.inc.php /etc/phpmyadmin/config.inc.php
+COPY site_pma.conf /etc/nginx/conf.d/default.conf
+RUN chmod 644 /usr/share/webapps/phpmyadmin/config.inc.php
 # CREATE DIRECTORY TO BE ABLE TO EXECUTE NGINX
 RUN mkdir /run/nginx
 
