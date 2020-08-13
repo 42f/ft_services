@@ -1,14 +1,15 @@
 #!/bin/bash
 
+
 minikube delete
 
 #test to replace chown command
-iexport CHANGE_MINIKUBE_NONE_USER=true
+export CHANGE_MINIKUBE_NONE_USER=true
 
 sudo minikube start --driver=none
+sudo chown -R user42 $HOME/.kube $HOME/.minikube
 ./srcs/LoadBalancer/deploy_metallb.sh
-
-#sudo chown -R user42 $HOME/.kube $HOME/.minikube
+minikube status
 
 #to be activated at the end
 #minikube dashboard --url
