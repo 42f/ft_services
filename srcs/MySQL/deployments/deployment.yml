@@ -1,5 +1,35 @@
 ######## MYSQL
 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/lib/mysql"
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -15,13 +45,19 @@ spec:
       labels:
         app: mysql
     spec:
+      volumes:
+      - name: mysql-pv-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
       containers:
       - name: mysql
         image: ft_service/mysql
         imagePullPolicy: Never
         ports:
         - containerPort: 3306
-
+        volumeMounts:
+        - mountPath: "/var/lib/mysql/test"
+          name: mysql-pv-storage
 ---
 
 apiVersion: v1

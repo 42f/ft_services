@@ -31,7 +31,6 @@ builder ft_service/wordpress srcs/WordPress
 builder ft_service/mysql srcs/MySQL
 builder ft_service/phpmyadmin srcs/PhpMyAdmin
 
-
 #docker build --quiet -t ft_service/nginx srcs/Nginx
 #docker build --quiet -t ft_service/ftps srcs/FTPS/
 #docker build --quiet -t ft_service/influxdb srcs/InfluxDB

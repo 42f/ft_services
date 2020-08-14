@@ -22,7 +22,7 @@ CHECKLIST PROJECT :
 > SCRIPTS
 
 ‼️	move username and password input in go.sh instead of build
-
+⚠️	make a cleanup script to delete permanent volumes's data !
 
 
 ▸Nginx/
@@ -46,7 +46,9 @@ CHECKLIST PROJECT :
 
 
 ▸MySQL/
-
+❓	See if removing -uroot and -pfoobar still work
+⚠️	User k8s secret to set user and password
+⚠️	Make sure data is peristant !!!
 
 ▸PhpMyAdmin/
 

@@ -14,14 +14,17 @@ __mysql_config() {
  
 __start_mysql() {
     echo "Running the start_mysql function."
+    echo "DB before configuration :"
     mysql -uroot -pfoobar -e "SHOW DATABASES;"
     mysql -uroot -pfoobar < /tmp/phpmyadmin.sql
     mysql -uroot -pfoobar < /tmp/wp.sql
     mysqladmin -u root password foobar
+    echo "DB after configuration :"
     mysql -uroot -pfoobar -e "SHOW DATABASES;"
-    mysql -uroot -pfoobar -e "CREATE DATABASE wp"
+#    mysql -uroot -pfoobar -e "CREATE DATABASE wp"
     mysql -uroot -pfoobar -e "CREATE USER 'admin'@'%' IDENTIFIED BY '42';"
     mysql -uroot -pfoobar -e "GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%';"
+    echo "AFTER creating user :"
     mysql -uroot -pfoobar -e "SHOW GRANTS FOR 'admin'@'%';"
 
     killall mysqld
