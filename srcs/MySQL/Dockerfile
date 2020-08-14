@@ -14,7 +14,8 @@ RUN apk update && apk upgrade && apk add --no-cache mariadb mariadb-common maria
 	&& mkdir -p /run/openrc && touch /run/openrc/softlevel											\ 
 	&& /etc/init.d/mariadb setup				
 
-COPY create_db.sql /tmp/
+COPY phpmyadmin.sql /tmp/
+COPY wp.sql /tmp/
 COPY config_mariadb.sh /bin/config_mariadb.sh
 COPY mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 RUN chmod 700 /bin/config_mariadb.sh && ./bin/config_mariadb.sh

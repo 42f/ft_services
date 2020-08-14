@@ -15,7 +15,8 @@ __mysql_config() {
 __start_mysql() {
     echo "Running the start_mysql function."
     mysql -uroot -pfoobar -e "SHOW DATABASES;"
-    mysql -uroot -pfoobar < /tmp/create_db.sql
+    mysql -uroot -pfoobar < /tmp/phpmyadmin.sql
+    mysql -uroot -pfoobar < /tmp/wp.sql
     mysqladmin -u root password foobar
     mysql -uroot -pfoobar -e "SHOW DATABASES;"
     mysql -uroot -pfoobar -e "CREATE DATABASE wp"
