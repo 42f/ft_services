@@ -36,11 +36,11 @@ COPY supervisord.conf /etc/supervisord.conf
 
 # CREATE A BASIC WEBPAGE
 RUN mkdir /tmp/mynginx
-COPY index.html /tmp/mynginx/index.html
+COPY webpage.tar.gz /tmp/mynginx/
+RUN cd /tmp/mynginx && tar -xf /tmp/mynginx/webpage.tar.gz
 
 # CREATE DIRECTORY TO BE ABLE TO EXECUTE NGINX
 RUN mkdir /run/nginx
-
 
 COPY sshd_config /etc/ssh/
 COPY start.sh /bin/start.sh
