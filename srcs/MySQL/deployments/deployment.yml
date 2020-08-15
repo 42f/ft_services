@@ -9,11 +9,11 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 1Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/var/lib/mysql"
+    path: "/var/lib/mysql/"
 
 ---
 
@@ -27,19 +27,36 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 10Gi
 
 ---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  type: ClusterIP
+  selector:
+    app: mysql
+  ports:
+  - port: 3306 
+
+---
+
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
+  labels:
+    app: mysql
 spec:
   serviceName: "mysql"
   selector:
     matchLabels:
       app: mysql
-  replicas: 1
   template:
     metadata:
       labels:
@@ -56,20 +73,6 @@ spec:
         ports:
         - containerPort: 3306
         volumeMounts:
-        - mountPath: "/var/lib/mysql/test"
+        - mountPath: "/var/lib/mysql"
           name: mysql-pv-storage
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql
-  labels:
-    app: mysql
-spec:
-  type: ClusterIP
-  ports:
-  - port: 3306 
-  selector:
-    app: mysql
 

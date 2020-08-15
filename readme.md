@@ -22,7 +22,7 @@ CHECKLIST PROJECT :
 > SCRIPTS
 
 ‼️	move username and password input in go.sh instead of build
-⚠️	make a cleanup script to delete permanent volumes's data !
+⚠️	make a cleanup script to delete permanent volumes's data
 
 
 ▸Nginx/
