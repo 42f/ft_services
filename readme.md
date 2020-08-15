@@ -1,3 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   readme.md                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bvalette <bvalette@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/15 19:31:50 by bvalette          #+#    #+#             */
+/*   Updated: 2020/08/15 19:31:54 by bvalette         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+
+
+
 GET IP OF CONTAINER
 
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -n1 -qf ancestor=ft_service/ftps)
