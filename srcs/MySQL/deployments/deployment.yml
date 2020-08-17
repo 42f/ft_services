@@ -13,7 +13,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/var/lib/mysql/"
+    path: "/tmp/k8s_pvc/mysql"
 
 ---
 

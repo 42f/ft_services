@@ -19,7 +19,6 @@ COPY mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
 COPY start.sh /bin
 RUN chmod 700 /bin/start.sh 
-#&& ./bin/start.sh
 
 RUN rm -rf /var/lib/mysql
 

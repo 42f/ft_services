@@ -13,7 +13,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/data"
+    path: "/tmp/k8s_pvc/ftps"
 
 ---
 
@@ -57,7 +57,7 @@ metadata:
   labels:
     app: ftps
 spec:
-  replicas: 2
+  replicas: 1
   serviceName: "ftps"
   selector:
     matchLabels:
