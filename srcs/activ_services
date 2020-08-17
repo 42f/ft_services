@@ -1,7 +1,4 @@
 InfluxDB
-MySQL
-FTPS
-Nginx
-WordPress
-PhpMyAdmin
 Grafana
+MySQL
+Nginx

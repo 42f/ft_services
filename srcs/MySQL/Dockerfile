@@ -27,3 +27,4 @@ COPY supervisord.conf /etc/supervisord.conf
 
 # DEFAULT COMMAND :
 CMD ["./bin/start.sh"]
+
