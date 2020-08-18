@@ -27,6 +27,9 @@ CHECKLIST PROJECT :
 
 
 ▸Nginx/
+	link to dashboards :
+http://192.168.99.102:3000/d/_Z02h8nGz/ft_services-global?orgId=1&refresh=1m&var-datasource=telegraf_metrics&var-inter=10s&var-server=influxdb-0&var-mountpoint=All&var-cpu=All&var-disk=All&var-netif=All
+
 ⚠️	change 128 -> 2048 !!
 ✅	https redirection
 ✅	SSH connectivity ?

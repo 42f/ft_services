@@ -22,9 +22,11 @@ COPY datasources.yml /usr/share/grafana/conf/provisioning/datasources/default.ym
 # ADD SUPERVISOR CONFIG FILE
 COPY supervisord.conf /etc/supervisord.conf
 
-# ADD GRAFANA DASHBOARDS DB
-#COPY grafana.db /var/lib/grafana/
+# PROVISIONING DASHBOARD BASE
+COPY dashboard-test.yaml /usr/share/grafana/conf/provisioning/dashboards
 
-COPY scripted.js /usr/share/grafana/public/dashboards/
+COPY dashboards.tar.gz /var/lib/grafana/dashboards/
+RUN cd /var/lib/grafana/dashboards && tar -xf dashboards.tar.gz
 
 CMD ["supervisord"]
+
