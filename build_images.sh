@@ -9,9 +9,9 @@ up (){
 }
 
 builder () {
-	printf "${DARK}BUILDING:	$1		"
-	docker build -qt $1 $2 > /dev/null
-	printf "${GREEN}[OK]${RESET}\n"
+	printf "${GREEN}BUILDING:	$1		${DARK}\n"
+	docker build -t $1 $2 | while read i; do echo -en "${DARK}\033[2K\r$i"; done
+	printf "\n${GREEN}[OK]${RESET}\n"
 }
 
 builder ft_service_alpine srcs/base_image

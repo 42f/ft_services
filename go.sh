@@ -4,7 +4,7 @@ GREEN='\033[1;32m'
 DARK='\033[1;93m'
 RESET='\033[0m'
 
-echo -e "\n\n${GREEN}Please set credentials for user accounts inside containers:\n(hint: pick something easy for evaluation purposes${RESET}"
+echo -e "\n\n${GREEN}Please set credentials for user accounts inside containers:\n(hint: pick something easy for evaluation purposes)${RESET}"
 printf "User name: "
 read USER_NAME
 stty -echo
@@ -28,7 +28,7 @@ up (){
 
 launch () {
 	kubectl apply -f srcs/$1/deployments/deployment.yml 
-	printf "${DARK}Waitin for $1${RESET}\n"
+	printf "\n${DARK}Waitin for $1${RESET}\n"
 	until up $1
 	do	
 		printf "${DARK}.${RESET}"
@@ -37,19 +37,15 @@ launch () {
 }
 
 show_address () {
-	printf "\n\n${GREEN}--> ${RED}$1${RESET}${GREEN} address:${RESET}\n"
+	printf "\n${GREEN}--> ${RED}$1${RESET}${GREEN} address:${RESET}		"
+	kubectl get services $2 -o json | jq .spec.loadBalancerIP | sed s/\"//g	
 	if [[ "$2" == *"https"*  ]]; then
-		printf "☝️ use curl --insecure to check\n"
-		minikube service $2 --url --https=true
+		printf "☝️ use curl --insecure to check the 301 redirection\n"
 	elif [[ "$2" == *"ftps"*  ]]; then
 		printf "☝️ [set ssl:verify-certificate false] in lftprc given the ftps fact container uses a selfsigned certificate\n"
-		printf "☝️ lftp -u $USER_NAME,[PASSWORD] [ADDRESS]\n"
-		minikube service $2 --url | head -1
+		printf "☝️ usage: lftp -u $USER_NAME,[PASSWORD] [ADDRESS]\n"
 	elif [[ "$2" == *"ssh"*  ]]; then
 		printf "☝️ ssh $USER_NAME@[IP] -p [PORT]\n"
-		minikube service $2 --url --https=false
-	else
-		minikube service $2 --url --https=false
 	fi
 }
 
@@ -63,8 +59,8 @@ done
 printf "\n\n${GREEN}ALL SET${RESET}\n"
 
 
-printf "${GREEN}For evaluation, start by going on nginx webpagge : 192.168.99.100 and access all other web based services${RESET}\n"
-show_address "Nginx" nginx
+printf "${GREEN}For evaluation, start by going on nginx webpage and access all other web based services${RESET}\n"
+show_address "Nginx" nginx 
 show_address "Nginx-https" nginx-https
 show_address "Nginx-ssh" nginx-ssh
 show_address "Dashboard" grafana
