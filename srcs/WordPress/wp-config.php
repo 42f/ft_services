@@ -1,4 +1,5 @@
 <?php
+include '.env.php';
 /**
  * The base configuration for WordPress
  *
@@ -23,7 +24,7 @@
 define( 'DB_NAME', 'wp' );
 
 /** MySQL database username */
-define( 'DB_USER', 'admin' );
+define( 'DB_USER', 'wp_admin' );
 
 /** MySQL database password */
 define( 'DB_PASSWORD', '42' );

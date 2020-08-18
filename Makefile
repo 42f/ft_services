@@ -1,6 +1,11 @@
 all:
 	./setup.sh
 
+re:
+	./delete.sh
+	./build_images.sh
+	./go.sh
+
 clean:
 	./cleanup.sh
 

@@ -22,8 +22,11 @@ start_mysql() {
     mysql --defaults-file=/etc/my.cnf.d/mariadb-server.cnf -e "SHOW DATABASES;"
     mysql --defaults-file=/etc/my.cnf.d/mariadb-server.cnf -e "CREATE USER '${SECRET_NAME}'@'%' IDENTIFIED BY '${SECRET_PASS}';"
     mysql --defaults-file=/etc/my.cnf.d/mariadb-server.cnf -e "GRANT ALL PRIVILEGES ON *.* TO '${SECRET_NAME}'@'%';"
+    mysql --defaults-file=/etc/my.cnf.d/mariadb-server.cnf -e "CREATE USER 'wp_admin'@'%' IDENTIFIED BY '42';"
+    mysql --defaults-file=/etc/my.cnf.d/mariadb-server.cnf -e "GRANT ALL PRIVILEGES ON wp.* TO 'wp_admin'@'%';"
 	printf "\n${GREEN}After user creation${DARK}\n"
     mysql --defaults-file=/etc/my.cnf.d/mariadb-server.cnf -e "SHOW GRANTS FOR '${SECRET_NAME}'@'%';"
+    mysql --defaults-file=/etc/my.cnf.d/mariadb-server.cnf -e "SHOW GRANTS FOR 'wp_admin'@'%';"
     mysql --defaults-file=/etc/my.cnf.d/mariadb-server.cnf -e "FLUSH PRIVILEGES;"
 
     killall mysqld

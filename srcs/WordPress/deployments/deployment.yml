@@ -19,6 +19,17 @@ spec:
       - name: wordpress
         image: ft_service/wordpress
         imagePullPolicy: Never
+        env:
+        - name: SECRET_NAME
+          valueFrom:
+            secretKeyRef:
+              name: user-credential 
+              key: name 
+        - name: SECRET_PASS
+          valueFrom:
+            secretKeyRef:
+              name: user-credential 
+              key: pass
         ports:
         - containerPort: 5050
 

@@ -1,6 +1,7 @@
 kubectl delete secret user-credential
 kubectl delete service --all
 kubectl delete statefulsets.apps --all
+kubectl delete pods --force --all
 
 # !attention these commands remove volumes, must be used in cleaning script instead
 #cat srcs/activ_services | xargs -I % kubectl delete -f srcs/%/deployments/deployment.yml
