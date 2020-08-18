@@ -17,13 +17,13 @@ RUN apk update && apk upgrade	\
 
 # ADD GRAFANA CONFIG FILE
 COPY grafana.ini /etc/grafana.ini
-COPY datasources.yml /usr/share/grafana/conf/provisioning/datasources/default.yml
+COPY datasources-provision.yml /usr/share/grafana/conf/provisioning/datasources/default.yml
 
 # ADD SUPERVISOR CONFIG FILE
 COPY supervisord.conf /etc/supervisord.conf
 
 # PROVISIONING DASHBOARD BASE
-COPY dashboard-test.yaml /usr/share/grafana/conf/provisioning/dashboards
+COPY dashboard-provision.yml /usr/share/grafana/conf/provisioning/dashboards
 
 COPY dashboards.tar.gz /var/lib/grafana/dashboards/
 RUN cd /var/lib/grafana/dashboards && tar -xf dashboards.tar.gz

@@ -8,7 +8,6 @@ RESET='\033[0m'
 mysql_config() {
 	printf "\n\n${GREEN}START MYSQL CONFIG ${DARK}\n"
     mysql_install_db --defaults-file=/etc/my.cnf.d/mariadb-server.cnf
-#    chown -R mysql:mysql --defaults-file=/etc/my.cnf.d/mariadb-server.cnf /var/lib/mysql
     /usr/bin/mysqld_safe --defaults-file=/etc/my.cnf.d/mariadb-server.cnf & 
     sleep 10
 }
