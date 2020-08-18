@@ -1,22 +1,10 @@
 all:
-	./start_minikube.sh
-	./build_images.sh
-
-f: all
-	./start_deployment.sh
-
-re_kube:
-	./clean_kubectl.sh
-	./build_images.sh
-
-re_docker:
-	./clean_docker.sh
-	./build_images.sh
-
-re: re_kube re_docker f
+	./setup.sh
 
 clean:
-	./clean_kubectl.sh
-	./clean_images.sh
+	./cleanup.sh
 
-
+fclean:
+	./cleanup.sh
+	sudo rm -rf /tmp/k8s_pvc
+	docker rmi $(docker image ls -q --filter label=project=ft_service)

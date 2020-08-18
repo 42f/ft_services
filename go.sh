@@ -4,7 +4,7 @@ GREEN='\033[1;32m'
 DARK='\033[1;93m'
 RESET='\033[0m'
 
-echo -e "${GREEN}Please set credentials for user accounts inside containers:${RESET}"
+echo -e "\n\n${GREEN}Please set credentials for user accounts inside containers:\n(hint: pick something easy for evaluation purposes${RESET}"
 printf "User name: "
 read USER_NAME
 stty -echo
@@ -42,7 +42,7 @@ show_address () {
 		printf "☝️ use curl --insecure to check\n"
 		minikube service $2 --url --https=true
 	elif [[ "$2" == *"ftps"*  ]]; then
-		printf "☝️ [set ssl:verify-certificate false] in ~/.lftprc given the ftps container uses a selfsigned certificate\n"
+		printf "☝️ [set ssl:verify-certificate false] in lftprc given the ftps fact container uses a selfsigned certificate\n"
 		printf "☝️ lftp -u $USER_NAME,[PASSWORD] [ADDRESS]\n"
 		minikube service $2 --url | head -1
 	elif [[ "$2" == *"ssh"*  ]]; then
@@ -62,10 +62,14 @@ done
 
 printf "\n\n${GREEN}ALL SET${RESET}\n"
 
-show_address Dashboard grafana
-show_address "FTPS" ftps
+
+printf "${GREEN}For evaluation, start by going on nginx webpagge : 192.168.99.100 and access all other web based services${RESET}\n"
 show_address "Nginx" nginx
 show_address "Nginx-https" nginx-https
 show_address "Nginx-ssh" nginx-ssh
+show_address "Dashboard" grafana
 show_address "WordPress" wordpress
+show_address "PhpMyADMIN" phpmyadmin
+show_address "FTPS" ftps
+
 
