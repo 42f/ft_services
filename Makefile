@@ -14,3 +14,4 @@ fclean:
 	sudo rm -rf /tmp/k8s_pvc
 	minikube delete
 	docker rmi --force $$(docker image ls -q --filter label=project=ft_service)
+
