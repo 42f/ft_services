@@ -1,3 +1,6 @@
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Kubernetes_logo.svg"
+     style="float: left; margin-right: 10px;" width=200px />
+
 # PROJECT:
 
 Ft_service is a project based on k8s in which we have to deploy multiple services: nginx, wordpress, ftps, grafana, influxdb, mysql and phpmyadmin.
